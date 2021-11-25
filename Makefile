@@ -7,3 +7,4 @@ stop:
 	docker-compose stop
 
 restart: stop start
+
