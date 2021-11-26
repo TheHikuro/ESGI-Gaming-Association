@@ -43,6 +43,11 @@ class Event
      */
     private $association;
 
+    public function __construct()
+    {
+        $this->create_date = new \DateTime('now');
+    }
+
     public function getId(): ?int
     {
         return $this->id;

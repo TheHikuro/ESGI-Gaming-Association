@@ -2,7 +2,8 @@
 
 namespace App\Controller\Default;
 
-use App\Entity\User;
+use App\Entity\User\Section;
+use App\Entity\User\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,9 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $sectionsList = $entityManager->getRepository(Section::class)->findAll();
+        
+        $form = $this->createForm(RegistrationFormType::class, $user, ['sections' => $sectionsList]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
