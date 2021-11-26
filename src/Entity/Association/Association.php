@@ -2,7 +2,7 @@
 
 namespace App\Entity\Association;
 
-use App\Entity\User\User;
+use App\Entity\User;
 use App\Repository\Association\AssociationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -106,24 +106,24 @@ class Association
         return $this->members;
     }
 
-    public function addMember(User $member): self
-    {
-        if (!$this->members->contains($member)) {
-            $this->members[] = $member;
-            $member->addAssociation($this);
-        }
+    // public function addMember(User $member): self
+    // {
+    //     if (!$this->members->contains($member)) {
+    //         $this->members[] = $member;
+    //         $member->addAssociation($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeMember(User $member): self
-    {
-        if ($this->members->removeElement($member)) {
-            $member->removeAssociation($this);
-        }
+    // public function removeMember(User $member): self
+    // {
+    //     if ($this->members->removeElement($member)) {
+    //         $member->removeAssociation($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getOwner(): ?User
     {
