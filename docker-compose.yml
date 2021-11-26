@@ -10,6 +10,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
+      
   phpmyadmin:
     image: phpmyadmin:5.1.1
     container_name: phpmyadmin
@@ -22,8 +23,22 @@ services:
       - 9000:80
 
   php-fpm:
-    image: php:8.0.13-fpm-buster
+    image: php:8.0.13-apache-buster
+    build: .docker/build/php-fpm
     container_name: php-fpm
-    working_dir: /app/public
+    working_dir: /var/www/
+    ports:
+      - 8080:80
     volumes:
-      - ./public:/app/public
+      - ./:/var/www/
+      - .docker/conf/php-fpm/apache2.conf:/etc/apache2/apache2.conf
+      - .docker/conf/php-fpm/sites-enabled/:/etc/apache2/sites-enabled
+
+  composer:
+    image: composer:2
+    container_name: composer
+    command: composer install
+    depends_on:
+      - php-fpm
+    volumes: 
+      - ./:/app
