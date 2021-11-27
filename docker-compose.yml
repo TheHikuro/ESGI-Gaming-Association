@@ -2,23 +2,26 @@ version: '3.5'
 
 services:
 
-  db:
+  mariadb:
     image: mariadb:10.7.1
     container_name: mariadb
     environment:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
       
   phpmyadmin:
     image: phpmyadmin:5.1.1
     container_name: phpmyadmin
     depends_on:
-      - db
+      - mariadb
     environment:
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      PMA_HOST: mariadb
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
     ports:
       - 9000:80
 

@@ -55,6 +55,7 @@ class Association
     {
         $this->members = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->create_date = new \DateTime('now');
     }
 
     public function getId(): ?int

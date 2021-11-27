@@ -93,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->associations = new ArrayCollection();
+        $this->create_date = new \DateTime('now');
     }
 
     public function getId(): ?int
