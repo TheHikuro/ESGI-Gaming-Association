@@ -28,6 +28,7 @@ security:
         enable_csrf: true
       logout:
         path: app_logout
+        target: login
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -42,3 +43,5 @@ security:
     - { path: ^/user, roles: ROLE_USER }
     - { path: ^/register, roles: IS_ANONYMOUS }
     - { path: ^/login, roles: [IS_ANONYMOUS, ROLE_USER] }
+    - { path: ^/home, roles: [ROLE_USER] }
+    - { path: ^/logout, roles: [ROLE_USER] }
