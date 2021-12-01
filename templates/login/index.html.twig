@@ -4,21 +4,49 @@
 {# ... #}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class='w-full h-screen flex items-center justify-center flex-col'>
+        <img src='{{ asset('img/background.jpeg') }}' class='z-0 absolute h-screen bg-center bg-no-repeat w-full'>
+        <form action="{{ path('login') }}" method="post" class='flex flex-col h-3/6 w-1/4 rounded-lg shadow-xl items-center z-30 bg-gray-50 blur-md'>
+            <div class='h-full w-full items-center flex justify-evenly flex-col'>
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+                <div class='flex h-1/5 justify-center flex-col items-center mt-6'>
+                    <img src='{{ asset('img/ESGI-logo.png') }}' class='w-32 h-32 shadow-2xl rounded-full mb-2' alt='logo'>
+                </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+                <div class='mt-7'>
+                    <div class='flex items-center justify-center '>
+                    <div class='mr-60 absolute mb-3'>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder='Email :' class='block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out mb-3 shadow-lg'/>
+                    </div>
 
-        <input type="hidden" name="_target_path" value="/user"/>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class='flex items-center justify-center'>
+                        <div class='mr-60 absolute'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <input type="password" id="password" name="_password" placeholder='Password :' class='block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out shadow-lg'/>
+                    </div>
+                </div>
 
+                <div class='h-auto flex justify-center'>
+                    <input type="hidden" name="_target_path" value="/user"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
 
-        <button type="submit">login</button>
-    </form>
+                {% if error %}
+                    <div class='text-red-500'>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                
+                <div class=''>
+                    <button type="submit" class='rounded-xl shadow-lg hover:shadow-sm h-12 w-44 font-medium bg-white'>Login</button>
+                </div>
+            </div>
+        </form>
+        <a href='{{ path('register') }}' class='z-30 text-white hover:text-blue-600 underline mt-3'>Vous n'avez pas de compte ?</a>
+    <div>
 {% endblock %}
