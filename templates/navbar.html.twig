@@ -1,4 +1,4 @@
-<div class='flex md:flex flex-col md:flex-row h-screen w-44 relative' style='background-color: #4A4747'>
+<div class='flex md:flex flex-col md:flex-row h-screen w-48 relative' style='background-color: #4A4747'>
     <nav :class='{'block': open, 'hidden': !open}' role='navigation' class='flex-grow md:block px-4 pb-4 md:pb-0 h-screen '>
         <div class='flex flex-between flex-col h-screen'>
             <div class='flex h-1/5 mb-5 justify-center flex-col items-center mt-5'>
@@ -20,11 +20,28 @@
                     </svg>
                     <p class='ml-2'>Profil</p> 
                 </div>
-                <div class='text-white hover:bg-gray-200 hover:text-black hover:shadow-lg px-3 py-2 rounded-md text-sm font-medium flex flex-row items-center cursor-pointer mb-3' onClick="location.href='{{ path('login') }}'">
+                <div class='text-white hover:bg-gray-200 hover:text-black hover:shadow-lg px-3 py-2 rounded-md text-sm font-medium flex flex-row items-center cursor-pointer mb-3 h-10' onClick={openNav('submenu-assos')}>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
-                    <p class='ml-2'>Association</p> 
+                    <p class='ml-2'>Association</p>
+                    <div id='submenu-assos' class='hidden h-20'>
+                        <div class='absolute rounded-lg bg-white w-56 mt-1 ml-16 shadow-lg'>
+                                <div class='flex justify-around text-black h-9 hover:bg-gray-300 items-center rounded-t-lg'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>
+                                    </svg>
+                                    <p class='ml-2'>Mes associations<p>
+                                </div>
+                                <div class='flex justify-around text-black h-9 hover:bg-gray-300 items-center rounded-b-lg'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                    <p class='ml-2'>Rejoindre associations</p>
+                                </div>
+                            </div>
+                    </div>
                 </div>
                 <div class='text-white hover:bg-gray-200 hover:text-black hover:shadow-lg px-3 py-2 rounded-md text-sm font-medium flex flex-row items-center cursor-pointer mb-3' onClick="location.href='{{ path('login') }}'">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,20 +50,31 @@
                     <p class='ml-2'>Forum</p> 
                 </div>
             </div>
-            <div class=' flex h-1/5 items-end '>
-                <div class='group text-white hover:bg-gray-200 hover:text-black hover:shadow-lg px-3 py-2 rounded-md text-sm font-medium flex flex-row items-center cursor-pointer'>
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <div class=' ml-2'>
-                        <p class=''>Paramètres<p>
-                        <div class='hidden group-hover:block absolute left-0 bottom-0 rounded-lg bg-white w-36 ml-2.5 mb-16 shadow-lg  h-24'>
-                            <div class='flex justify-center text-black h-8 hover:bg-gray-300 items-center rounded-t-lg'>
-                                <p>Paramètres<p>
+            <div class='flex h-1/5 items-end '>
+                <div class='text-white shadow-2xl bg-transparent border hover:bg-white hover:text-black hover:shadow-lg px-3 py-2 rounded-md  text-sm font-medium flex flex-row items-center cursor-pointer w-40 h-10' 
+                onClick={openNav('settings')}>
+                    <div class='flex justify-center items-center w-full'>
+                        <p class='font-medium'>{{ app.user.pseudo }}<p>
+                        <div class='hidden absolute left-0 bottom-0 rounded-lg bg-white w-40 ml-4 mb-20 shadow-lg h-28' id='settings'>
+                            <div class='flex justify-around text-black h-9 hover:bg-gray-300 items-center rounded-t-lg'>
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <p class='ml-2'>Paramètres<p>
                             </div>
-                            <div class='flex justify-center text-black h-8 hover:bg-gray-300 items-center'>Editer mon profil</div>
-                            <div class='flex justify-center text-black h-8 hover:bg-gray-300 items-center rounded-b-lg' onClick="location.href='{{ path('app_logout') }}'">Se déconnecter</div>
+                            <div class='flex justify-around text-black h-9 hover:bg-gray-300 items-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                <p class='ml-2'>Editer mon profil</p>
+                            </div>
+                            <div class='flex justify-around text-black h-9 hover:bg-gray-300 items-center' onClick="location.href='{{ path('app_logout') }}'">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                <p class='ml-2'>Se déconnecter</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,3 +82,14 @@
         </div>
     </nav>
 </div>
+
+<script>
+    function openNav(id) {
+        const nav = document.getElementById(id);
+        if(nav.style.display === 'block'){
+            nav.style.display = 'none';
+        } else {
+            nav.style.display = 'block';
+        }
+    }
+</script>
