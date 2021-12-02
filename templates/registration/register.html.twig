@@ -3,19 +3,79 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class='w-full h-screen flex items-center justify-center flex-col'>
+        <img src='{{ asset('img/background.jpeg') }}' class='z-0 absolute h-screen bg-center bg-no-repeat w-full'>
+        {{ form_start(registrationForm, {'attr': {'class': 'flex flex-col h-3/4 w-1/4 rounded-lg shadow-xl items-center z-30 bg-gray-50 blur-md'}}) }}
+            <div class='h-full w-full items-center flex justify-evenly flex-col'>
+                <div class='flex h-1/5 justify-center flex-col items-center mt-6'>
+                    <img src='{{ asset('img/ESGI-logo.png') }}' class='w-32 h-32 shadow-2xl rounded-full mb-2' alt='logo'>
+                </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.section) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                <div class='mt-7'>
+                    <div class='flex items-center justify-center'>
+                        <div class='mr-60 absolute mb-3'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        {{ form_widget(registrationForm.lastname, { 'attr': { 'placeholder': 'Nom', 'class': 'block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out mb-3 shadow-lg'}}) }}
+                    </div>
+                    <div class='flex items-center justify-center'>
+                        <div class='mr-60 absolute mb-3'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                        </div>
+                        {{ form_widget(registrationForm.name, { 'attr': { 'placeholder': 'Prénom', 'class': 'block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out mb-3 shadow-lg'}}) }}
+                    </div>
+                    <div class='flex items-center justify-center'>
+                        <div class='mr-60 absolute mb-3'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                            </svg>
+                        </div>
+                        {{ form_widget(registrationForm.email, { 'attr': { 'placeholder': 'Email', 'class': 'block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out mb-3 shadow-lg'}}) }}
+                    </div>
+                    <div class='flex items-center justify-center'>
+                        <div class='mr-60 absolute mb-3'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                        </div>
+                        {{ form_widget(registrationForm.pseudo, { 'attr': { 'placeholder': 'Pseudo', 'class': 'block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out mb-3 shadow-lg'}}) }}
+                    </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    <div class=''>
+                        {{ form_widget(registrationForm.section, { 'attr': { 'class': 'block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out mb-3 shadow-lg' } }) }}
+                    </div>
+
+                    <div class='flex items-center justify-center'>
+                        <div class='mr-60 absolute'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        {{ form_widget(registrationForm.plainPassword, { 'attr': { 'placeholder': 'Mot de passe', 'class': 'block w-72 pl-12 pr-3 py-2 h-12 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-500 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out shadow-lg'}}) }}
+                    </div>
+
+                    <div class='mt-4'>
+                        <label class="inline-flex items-center">
+                            {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions') }}
+                            {{ form_widget(registrationForm.agreeTerms, { 'attr': { 'class': 'form-checkbox ml-1'}}) }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class='h-auto flex justify-center'>
+                    <input type="hidden" name="_target_path" value="/user"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
+                
+                <div class=''>
+                    <button type="submit" class='rounded-xl shadow-lg hover:shadow-sm h-12 w-44 font-medium bg-white'>S'enregistrer</button>
+                </div>
+            </div>
+        {{ form_end(registrationForm) }}
+        <a href='{{ path('login') }}' class='z-30 text-white hover:text-blue-600 underline mt-3'>Se connecter ?</a>
+    <div>
 {% endblock %}
