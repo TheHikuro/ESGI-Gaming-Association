@@ -1,7 +1,9 @@
 module.exports = {
   theme: {},
   variants: {
-    display: ["group-hover"]
+    display: ["group-hover"],
+    backgroundColor: ['checked'],
+    borderColor: ['checked']
   },
   plugins: []
 };
