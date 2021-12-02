@@ -28,7 +28,7 @@ class RegistrationFormType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
                 'choice_label' => 'name',
-                'placeholder' => 'Choix de la section',
+                'placeholder' => 'Section',
                 'choices'  => $options['sections']
             ])
             ->add('plainPassword', PasswordType::class, [
