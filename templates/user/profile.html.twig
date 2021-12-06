@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+    <div class="w-full" style="background: red">
+        <div class="justify-self-center m-0 mx-32 border-0" style="background: grey">
+            <img src='{{ asset('img/banner.png') }}' class="h-64 object-cover w-full rounded">
+            <div class="justify-start">
+                <img src='{{ asset('img/sera.jpeg') }}' class="w-32 h-32 shadow-2xl rounded-full mb-2 object-cover p-1">
+                <h2>Odessa</h2>
+                <div>
+                    <button>Edit button</button>
+                </div>
+            </div>
+            <div> info du user</div>
+        </div>
+    </div>
+{% endblock %}
