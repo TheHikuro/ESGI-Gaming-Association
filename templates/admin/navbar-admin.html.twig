@@ -1,0 +1,29 @@
+{% block body %}
+<div class="flex flex-col w-full">
+    <div class="text-white flex flex-shrink-0 flex-col" style='background-color: #4A4747'>
+      <div class="flex relative items-center p-4 h-12">
+        <span class="text-2xl tracking-wide">Panneau d'administration</span>
+      </div>
+    </div>
+
+    <div class="text-white flex w-full" style='background-color: #4A4747'>
+      <div class="flex overflow-hidden h-12 ml-2">
+        <button class="mx-3 border-b-2 text-white hover:text-black hover:border-black font-medium" onClick={SelectCategory('users-panel')}>
+          <span>Utilisateurs</span>
+        </button>
+
+        <button class="mx-3 border-b-2 text-white hover:text-black hover:border-black font-medium" onClick={SelectCategory('associations-panel')}>
+          <span>Associations</span>
+        </button>
+
+        <button class="mx-3 border-b-2 text-white hover:text-black hover:border-black font-medium" onClick={SelectCategory('sections-panel')}>
+          <span>Sections</span>
+        </button>
+
+        <button class="mx-3 border-b-2 text-white hover:text-black hover:border-black font-medium" onClick={SelectCategory('forum-panel')}>
+          <span>Forum</span>
+        </button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
