@@ -36,6 +36,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function findDynamicUrl(string $firstName, string $lastName)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.name = :firstName')
+            ->setParameter('firstName', $firstName)
+            ->andWhere('u.lastname = :lastname')
+            ->setParameter('lastname', $lastName)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
