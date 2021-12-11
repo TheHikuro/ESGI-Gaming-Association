@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class='flex h-screen'>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ADMIN')%}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')%}
                 {% include "navbar.html.twig" %}
             {% endif %}
             {% block body %}

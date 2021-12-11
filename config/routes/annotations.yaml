@@ -10,6 +10,10 @@ user_controllers:
   name_prefix: user_
   type: annotation
 
+userUrl_controllers:
+  resource: ../../src/Controller/UserUrl
+  type: annotation
+
 default_controllers:
   resource: ../../src/Controller/Default
   type: annotation
