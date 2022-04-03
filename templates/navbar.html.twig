@@ -43,12 +43,14 @@
                         </div>
                     </div>
                 </div>
-                <div class='forum text-white hover:bg-gray-200 hover:text-black hover:shadow-lg px-3 py-2 rounded-md text-sm font-medium flex flex-row items-center cursor-pointer mb-3' onClick="location.href='{{ path('login') }}'">
+                {% if is_granted('ROLE_ADMIN') %}  
+                <div class='forum text-white hover:bg-gray-200 hover:text-black hover:shadow-lg px-3 py-2 rounded-md text-sm font-medium flex flex-row items-center cursor-pointer mb-3' onClick="location.href='{{ path('admin') }}'">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                     </svg>
-                    <p class='ml-2'>Forum</p> 
+                    <p class='ml-2'>Administration</p> 
                 </div>
+                {% endif %}
             </div>
             <div class='flex h-1/5 items-end '>
                 <div class='settings text-white shadow-2xl bg-transparent border hover:bg-white hover:text-black hover:shadow-lg px-3 py-2 rounded-md  text-sm font-medium flex flex-row items-center cursor-pointer w-40 h-10' 
