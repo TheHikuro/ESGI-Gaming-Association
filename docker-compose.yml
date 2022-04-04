@@ -45,3 +45,9 @@ services:
       - php-fpm
     volumes: 
       - ./:/app
+
+  mailcatcher:
+    image: jderusse/mailcatcher:latest
+    container_name: mailcatcher
+    ports:
+      - "8025:80"

@@ -14,6 +14,13 @@
                 </div>
 
                 <div class='mt-7'>
+                    {% if app.request.get('info') %}
+                        <div class='flex items-center justify-center '>
+                            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800 w-72" role="alert">
+                                <span class="font-medium"><p class="text-center">{{ app.request.get('info') }}</p></span>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class='flex items-center justify-center '>
                     <div class='mr-60 absolute mb-3'>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-current text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,8 +45,8 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </div>
 
-                {% if error %}
-                    <div class='text-red-500'>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% if app.request.get('error') %}
+                    <div class='text-red-500'>{{ app.request.get('error') }}</div>
                 {% endif %}
                 
                 <div class=''>
@@ -48,5 +55,6 @@
             </div>
         </form>
         <a href='{{ path('register') }}' class='z-30 text-white hover:text-blue-600 underline mt-3'>Vous n'avez pas de compte ?</a>
+        <a href='{{ path('recover') }}' class='z-30 text-white hover:text-blue-600 underline mt-3'>J'ai oublié mon mot de passe</a>
     <div>
 {% endblock %}

@@ -94,6 +94,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->associations = new ArrayCollection();
         $this->create_date = new \DateTime('now');
+        $this->comfirm_token = rtrim(strtr(base64_encode(random_bytes(150)), '+/', '-_'), '=');
     }
 
     public function getId(): ?int
@@ -274,9 +275,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password_recover_token;
     }
 
-    public function setPasswordRecoverToken(?string $password_recover_token): self
+    public function addPasswordRecoverToken(): self
     {
-        $this->password_recover_token = $password_recover_token;
+        $recoverToken = rtrim(strtr(base64_encode(random_bytes(150)), '+/', '-_'), '=');
+
+        $this->password_recover_token = $recoverToken;
+
+        return $this;
+    }
+
+    public function removePasswordToken(): self
+    {
+        $this->password_recover_token = null;
 
         return $this;
     }
