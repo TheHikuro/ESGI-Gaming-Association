@@ -11,11 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $sectionsList = $entityManager->getRepository(Section::class)->findAll();
@@ -24,6 +25,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $info = 'Un email de confirmation a été envoyé.';
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -34,9 +36,32 @@ class RegistrationController extends AbstractController
             $user->setRoles(["ROLE_USER"]);
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            
+            $userId = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()])->getId();
 
-            return $this->redirectToRoute('user_');
+            $urlConfirmation = $this->generateUrl(
+                'confirm_account',
+                [
+                    'userId' => $userId,
+                    'token' => $user->getComfirmToken()
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+
+            $email = (new \Swift_Message())
+            ->setFrom($_ENV['MAILER_USER'])
+            ->setTo($form->get('email')->getData())
+            ->setSubject('ESGI Gaming Association confirmation')
+            ->setBody(
+                $this->renderView('email/userConfirmationRegisterEmail.html.twig', [
+                    'name' => $form->get('name')->getData(),
+                    'url_confirmation' => $urlConfirmation
+                ]),
+                'text/html'
+            );
+            $mailer->send($email);
+
+            return $this->redirectToRoute('login', ['info' => $info]);
         }
 
         return $this->render('registration/register.html.twig', [
