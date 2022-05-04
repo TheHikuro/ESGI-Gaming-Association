@@ -35,6 +35,7 @@ services:
     volumes:
       - ./:/var/www/
       - .docker/conf/php-fpm/apache2.conf:/etc/apache2/apache2.conf
+      - .docker/conf/php-fpm/elastic_apm.ini:/usr/local/etc/php/conf.d/elastic_apm.ini
       - .docker/conf/php-fpm/sites-enabled/:/etc/apache2/sites-enabled
 
   composer:
