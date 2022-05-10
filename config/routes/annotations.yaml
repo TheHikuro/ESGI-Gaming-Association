@@ -4,9 +4,14 @@ admin_controllers:
   name_prefix: admin_
   type: annotation
 
+api_controllers:
+  resource: ../../src/Controller/Api
+  prefix: /api
+  name_prefix: api_
+  type: annotation
+
 user_controllers:
   resource: ../../src/Controller/User
-  prefix: /user
   name_prefix: user_
   type: annotation
 
@@ -16,10 +21,6 @@ userUrl_controllers:
 
 default_controllers:
   resource: ../../src/Controller/Default
-  type: annotation
-
-home_controllers:
-  resource: ../../src/Controller
   type: annotation
 
 kernel:

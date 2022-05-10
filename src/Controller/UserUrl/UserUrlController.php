@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserUrlController extends AbstractController
 {
-    #[Route('/{username}', name: 'user_url')]
+    #[Route('/{username}', name: 'user_url', priority: -1)]
     public function index(string $username, UserService $userService, UserRepository $userRepository): Response
     {
         $dynanicUrl = $userService->checkUrlIsValidUsername($username, $userRepository);
