@@ -4,6 +4,7 @@ namespace App\Entity\User;
 
 use App\Entity\Association\Association;
 use App\Repository\User\UserRepository;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,6 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Ignore
      */
     private $password;
 
@@ -71,11 +73,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Ignore
      */
     private $comfirm_token;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Ignore
      */
     private $password_recover_token;
 
@@ -118,6 +122,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * A visual identifier that represents this user.
      *
      * @see UserInterface
+     * @Ignore
      */
     public function getUserIdentifier(): string
     {
@@ -126,6 +131,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     * @Ignore
      */
     public function getUsername(): string
     {
@@ -153,6 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see PasswordAuthenticatedUserInterface
+     * @Ignore
      */
     public function getPassword(): string
     {
@@ -171,6 +178,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
+     * @Ignore
      */
     public function getSalt(): ?string
     {
@@ -258,6 +266,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @Ignore
+     */
     public function getComfirmToken(): ?string
     {
         return $this->comfirm_token;
@@ -270,6 +281,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @Ignore
+     */
     public function getPasswordRecoverToken(): ?string
     {
         return $this->password_recover_token;
