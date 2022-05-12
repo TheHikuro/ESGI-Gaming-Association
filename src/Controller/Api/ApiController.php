@@ -16,6 +16,9 @@ class ApiController extends AbstractController
         return new JsonResponse([
             'code' => 200,
             'message' => 'Welcome to the ESGI Gaming API !',
+            'data' => [
+                'route' => $this->currentRoute
+            ]
         ], 200);
     }
 
@@ -34,6 +37,7 @@ class ApiController extends AbstractController
         $this->order = json_decode($request->query->get('order')) ? json_decode($request->query->get('order'), true) : [];
         $this->offset = (int)$request->query->get('offset') ? (int)$request->query->get('offset') : 0;
         $this->whitelistCriteria = [];
+        $this->currentRoute = $request->get('_route');
     }
 
     public function whitelistCriteriaValidator()
