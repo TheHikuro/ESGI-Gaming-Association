@@ -3,5 +3,9 @@ module.exports = {
   variants: {
     display: ["group-hover"]
   },
-  plugins: []
+  plugins: [],
+  content: [
+    "./assets/**/*.{vue,js,ts,jsx,tsx}",
+    "./templates/**/*.{html,twig}",
+  ],
 };

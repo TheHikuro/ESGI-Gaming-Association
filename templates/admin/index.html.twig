@@ -1,5 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-Admin panel
+	<div class='w-full h-screen p-10 bg-gray-700'>
+		<div class='w-full h-full bg-white shadow-xl rounded-md flex '>
+			<div class='flex flex-col items-start justify-start w-1/6 h-full rounded-l-md bg-gray-100'>
+				<div class='flex flex-col p-3 w-full' id='contBtnDashboard'>
+					<h1 class='text-3xl uppercase block text-gray-400 font-semibold'>Dashboard</h1>
+					<button class='w-full h-10 bg-white rounded-md shadow-xl items-center flex justify-center mt-8 hover:bg-gray-300 uppercase font-semibold text-gray-500' name='btnUsers'>
+						Utilisateurs
+					</button>
+					<button class='w-full h-10 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 uppercase font-semibold text-gray-500' name='btnAssos'>
+						Associations
+					</button>
+					<button class='w-full h-10 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 uppercase font-semibold text-gray-500' name='btnSections'>
+						Sections
+					</button>
+					<button class='w-full h-10 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 uppercase font-semibold text-gray-500' name='btnMailer'>
+						Mailer
+					</button>
+				</div>
+			</div>
+			<div
+				class='flex justify-center items-center w-5/6 h-full rounded-r-md'>
+				{# Make a Table for every section #}
+				<div class='flex flex-col items-center justify-center w-full h-full'>
+					<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
+						<h1 class='text-xl text-left uppercase block text-gray-400 font-semibold'>Utilisateurs</h1>
+						<table class='w-full items-start top-0 mt-2' id='userList'>
+							<thead>
+								<tr></tr>
+							</thead>
+							<tbody class='overflow-scroll'></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script>
+		const api_user = '{{ path('api_user') }}';
+const api_asso = '{{ path('api_association') }}';
+const api_section = '{{ path('api_section') }}';
+	</script>
+	<script src='{{ asset('js/admin.js') }}'></script>
+
 {% endblock %}

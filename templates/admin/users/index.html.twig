@@ -1,0 +1,43 @@
+{% block div %}
+
+	<div class='flex flex-col items-center justify-center w-full h-full'>
+		<div class='flex flex-col items-center justify-center w-full h-full p-3'>
+			<h1 class='text-xl text-left uppercase block text-gray-400 font-semibold'>Utilisateurs</h1>
+			<table class='w-full h-full mt-2'>
+				<thead>
+					<tr>
+						<th class='text-center border h-10'>Nom</th>
+						<th class='text-center border h-10'>Prénom</th>
+						<th class='text-center border h-10'>Pseudo</th>
+						<th class='text-center border h-10'>Email</th>
+						<th class='text-center border h-10'>Section</th>
+						<th class='text-center border h-10'>Role</th>
+						<th class='text-center border h-10'>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr class='border'>
+							<td class='text-left'>{{ user.lastname }}</td>
+							<td class='text-left'>{{ user.firstname }}</td>
+							<td class='text-left'>{{ user.username }}</td>
+							<td class='text-left'>{{ user.email }}</td>
+							<td class='text-left'>{{ user.section }}</td>
+							<td class='text-left'>{{ user.role }}</td>
+							<td class='text-left'>
+								<a href='#' class='text-blue-500 hover:text-blue-700'>
+									<i class='fas fa-edit'></i>
+								</a>
+								<a href='#' class='text-red-500 hover:text-red-700'>
+									<i class='fas fa-trash-alt'></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+{% endblock %}

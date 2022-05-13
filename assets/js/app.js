@@ -7,19 +7,13 @@ import './scrollReveal'
 
 const arrEditProfil = []
 const data = document.getElementById('root').dataset
+//const $ = require('jquery');
 
 if (data) {
     arrEditProfil.push(data)
 }
 
-console.log(arrEditProfil)
-
 ReactDOM.render(
     <Router>
-        <Modal 
-            title='Editer mon profil'
-            content={arrEditProfil}
-            modaltitle='Editer mon profil'
-        />
     </Router>, document.getElementById('root')
 );
