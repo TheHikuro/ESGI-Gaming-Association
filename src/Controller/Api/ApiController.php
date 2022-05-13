@@ -22,7 +22,7 @@ class ApiController extends AbstractController
         ], 200);
     }
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, \Swift_Mailer $mailer)
     {
         $request = $requestStack->getCurrentRequest();
 
@@ -36,8 +36,15 @@ class ApiController extends AbstractController
         $this->criteria = json_decode($request->query->get('criteria')) ? json_decode($request->query->get('criteria'), true) : [];
         $this->order = json_decode($request->query->get('order')) ? json_decode($request->query->get('order'), true) : [];
         $this->offset = (int)$request->query->get('offset') ? (int)$request->query->get('offset') : 0;
+        
         $this->whitelistCriteria = [];
         $this->currentRoute = $request->get('_route');
+
+        $this->mailFrom = $request->query->get('mailFrom');
+        $this->mailSubject = $request->query->get('mailSubject');
+        $this->mailBody = $request->query->get('mailBody');
+
+        $this->mailer = $mailer;
     }
 
     public function whitelistCriteriaValidator()
@@ -105,6 +112,17 @@ class ApiController extends AbstractController
             }
         }
         return $arr;
+    }
+
+    public function sendMail($from, $to, $subject, $body)
+    {
+        $message = (new \Swift_Message())
+            ->setSubject($subject)
+            ->setBody($body)
+            ->setFrom($from)
+            ->setTo($to);
+
+        $this->mailer->send($message);
     }
 
     public function isAuthorized(Request $request)

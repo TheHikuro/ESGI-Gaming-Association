@@ -4,7 +4,6 @@ namespace App\Controller\Api;
 
 use App\Controller\Api\ApiController;
 use App\Repository\Association\AssociationRepository;
-use App\Repository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -17,28 +16,25 @@ use Symfony\Component\Serializer\SerializerInterface;
 #[Route('/association', name: 'association')]
 class AssociationController extends ApiController
 {
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, \Swift_Mailer $mailer)
     {
-        parent::__construct($requestStack);
+        parent::__construct($requestStack, $mailer);
         $this->whitelistCriteria = ['id', 'name', 'create_date', 'owner'];
     }
 
     #[Route('/find', name: '_find', methods: ['GET'])]
     public function list(Request $request, AssociationRepository $associationRepository, SerializerInterface $serializer): Response
     {
-        if (!$this->isAuthorized($request)) {
+        if (!$this->isAuthorized($request))
             return $this->unAuthorizedResponse();
-        }
 
         $associations = [];
 
-        if ($this->populate == null) {
+        if ($this->populate == null)
             return $this->unvalidatedPopulateResponse();
-        }
 
-        if (!$this->whitelistCriteriaValidator()) {
+        if (!$this->whitelistCriteriaValidator())
             return $this->unvalidatedCriteriaResponse();
-        }
 
         try {
             $associations = json_decode($serializer->serialize($associationRepository->findBy($this->criteria, $this->order, $this->limit, $this->offset), JsonEncoder::FORMAT, [AbstractObjectNormalizer::CIRCULAR_REFERENCE_LIMIT => 2, AbstractObjectNormalizer::ATTRIBUTES => $this->populate]));
@@ -52,13 +48,11 @@ class AssociationController extends ApiController
     #[Route('/edit', name: '_edit', methods: ['PUT'])]
     public function edit(Request $request, AssociationRepository $associationRepository): Response
     {
-        if (!$this->isAuthorized($request)) {
+        if (!$this->isAuthorized($request))
             return $this->unAuthorizedResponse();
-        }
 
-        if (!$this->whitelistCriteriaValidator() || empty($this->criteria)) {
+        if (!$this->whitelistCriteriaValidator() || empty($this->criteria))
             return $this->unvalidatedCriteriaResponse();
-        }
 
         try {
             $association = $associationRepository->findOneBy($this->criteria);
@@ -74,21 +68,18 @@ class AssociationController extends ApiController
     #[Route('/add', name: '_add', methods: ['POST'])]
     public function add(Request $request, AssociationRepository $associationRepository): Response
     {
-        if (!$this->isAuthorized($request)) {
+        if (!$this->isAuthorized($request))
             return $this->unAuthorizedResponse();
-        }
     }
 
     #[Route('/delete', name: '_delete', methods: ['DELETE'])]
     public function delete(Request $request, AssociationRepository $associationRepository, EntityManagerInterface $em): Response
     {
-        if (!$this->isAuthorized($request)) {
+        if (!$this->isAuthorized($request))
             return $this->unAuthorizedResponse();
-        }
         
-        if (!$this->whitelistCriteriaValidator() || empty($this->criteria)) {
+        if (!$this->whitelistCriteriaValidator() || empty($this->criteria))
             return $this->unvalidatedCriteriaResponse();
-        }
 
         try {
             $association = $associationRepository->findOneBy($this->criteria);
@@ -96,9 +87,8 @@ class AssociationController extends ApiController
             return $this->customErrorResponse($e->getMessage(), 400);
         }
 
-        if (!$association) {
+        if (!$association)
             return $this->customErrorResponse('Association not found', 404);
-        }
 
         $em->remove($association);
         $em->flush();
