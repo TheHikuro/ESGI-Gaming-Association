@@ -26,13 +26,41 @@
 				{# Make a Table for every section #}
 				<div class='flex flex-col items-center justify-center w-full h-full'>
 					<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
-						<h1 class='text-xl text-left uppercase block text-gray-400 font-semibold'>Utilisateurs</h1>
-						<table class='w-full items-start top-0 mt-2' id='userList'>
+						<h1 class='text-xl text-left uppercase block text-gray-400 font-semibold' id='title'></h1>
+						<table class='w-full items-start top-0 mt-2 hidden' id='userList'>
 							<thead>
 								<tr></tr>
 							</thead>
 							<tbody class='overflow-scroll'></tbody>
 						</table>
+						<div id='mailer' class='hidden w-full'>
+							<div class='flex flex-col items-center justify-center w-full h-full'>
+								<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
+									<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
+										<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
+											<label class='text-left text-gray-700 font-semibold uppercase'>Destinataire</label>
+											<input class='w-full h-10 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 p-3 font-semibold text-gray-500' type='text' name='mailTo' id='mailTo' placeholder='Pas besoin de destinataire si message pour tous'>
+										</div>
+										<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
+											<label class='text-left text-gray-700 font-semibold uppercase'>Sujet</label>
+											<input class='w-full h-10 p-3 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 font-semibold text-gray-500' type='text' name='mailSubject' id='mailSubject' placeholder='A propos du mail'>
+										</div>
+										<div class='flex flex-col items-start self-start justify-start w-full h-full p-3'>
+											<label class='text-left text-gray-700 font-semibold uppercase'>Contenu</label>
+											<textarea class='w-full h-52 p-3 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 font-semibold text-gray-500' name='mailContent' id='mailContent' placeholder='Vous pouvez écrire votre mail ici...'></textarea>
+										</div>
+										<div class='flex items-end self-end justify-end w-full h-full p-3'>
+											<button class='h-10 w-32 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 uppercase font-semibold text-gray-500' name='btnSendMail' onclick='btnSendMail()'>
+												Envoyer
+											</button>
+											<button class='h-10 w-52 ml-3 bg-white rounded-md shadow-xl items-center flex justify-center mt-3 hover:bg-gray-300 uppercase font-semibold text-gray-500' name='btnSendMail'>
+												Envoyer à tous
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -49,7 +77,28 @@ const api_section = '{{ path('api_section') }}';
 const closeModal = () => {
 document.getElementById('modal').classList.add('hidden');
 };
+const btnSendMail = async () => { // get all the inputs into an array.
+const api_mailer = '{{ path('api_user_sendmail') }}'
+const inputs = document.querySelectorAll('input');
+const textareas = document.querySelectorAll('textarea');
+const data = {};
+// loop through each input and add the value to the data object
+for (let i = 0; i < inputs.length; i++) {
+data[inputs[i].name] = inputs[i].value;
+}
+for (let i = 0; i < textareas.length; i++) {
+data[textareas[i].name] = textareas[i].value;
+}
+fetch (`${api_mailer}`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(data)
+})
+}
 	</script>
+	<script src='{{ asset('js/modal.js') }}'></script>
 	<script src='{{ asset('js/admin.js') }}'></script>
 
 {% endblock %}
