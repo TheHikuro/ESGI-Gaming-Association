@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+    <div class='flex flex-col items-center justify-center w-full h-full'>
+        <div class='flex flex-col items-center justify-center w-full h-full p-3'>
+            <h1 class='text-xl text-left uppercase block text-gray-400 font-semibold'>Votre association : League of legends</h1>
+            <table class='w-full mt-2'>
+                <thead>
+                <tr>
+                    <th class='text-center border h-10'>Nom</th>
+                    <th class='text-center border h-10'>Prénom</th>
+                    <th class='text-center border h-10'>Pseudo</th>
+                    <th class='text-center border h-10'>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr class='border'>
+                        <td class='text-left p-2'>nom user 1</td>
+                        <td class='text-left p-2'>prénom user 1</td>
+                        <td class='text-left p-2'>pseudo user 1</td>
+                        <td class='text-left p-2'>email user 1</td>
+                    </tr>
+                    <tr class='border'>
+                        <td class='text-left p-2'>nom user 2</td>
+                        <td class='text-left p-2' >prénom user 2</td>
+                        <td class='text-left p-2'>pseudo user 2</td>
+                        <td class='text-left p-2'>email user 2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

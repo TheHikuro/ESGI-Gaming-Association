@@ -15,4 +15,12 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    #[Route('/assos', name: 'assos')]
+    public function assos(): Response
+    {
+        return $this->render('user/assos.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
 }
