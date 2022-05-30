@@ -19,7 +19,7 @@ class Association
      * @ORM\Column(type="integer")
      */
     private $id;
-//djehfjefhejferefesfrefefgss
+//djehfjefhejferefesfrefefgssfghjklg
     /**
      * @ORM\Column(type="string", length=255)
      */
